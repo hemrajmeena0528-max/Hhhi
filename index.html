@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Baccha ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff6a88, #ff4f7b, #d4145a);
+    font-family: "Segoe UI", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+  }
+
+  /* subtle constellation lines */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 120px 120px, 200px 200px;
+    opacity: 0.4;
+  }
+
+  .lock-box {
+    position: relative;
+    z-index: 2;
+    background: rgba(120, 20, 60, 0.6);
+    padding: 30px 35px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    max-width: 85%;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 600;
+  }
+
+  #countdown {
+    margin-top: 10px;
+    font-size: 1em;
+    opacity: 0.9;
+  }
+
+  button {
+    margin-top: 16px;
+    padding: 10px 22px;
+    border-radius: 22px;
+    border: none;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    font-size: 0.95em;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+  }
+
+  button:active {
+    transform: scale(0.96);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="lock-box" id="lock">
+  <h1>Waiting for New Year ❤️</h1>
+  <div id="countdown">Loading…</div>
+
+  <!-- Play Song Button -->
+  <button onclick="playSong()">🎵 Play Song</button>
+</div>
+
+<!-- AUDIO -->
+<audio id="song" preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* -------- COUNTDOWN -------- */
+const targetDate = new Date("January 1, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("countdown").innerText =
+      "It’s finally here 💖";
+    return;
+  }
+
+  const h = Math.floor(diff / (1000 * 60 * 60));
+  const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerText =
+    `${h}h ${m}m ${s}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+/* -------- SONG PLAY -------- */
+function playSong() {
+  const audio = document.getElementById("song");
+  audio.play().catch(() => {
+    alert("Tap again to allow music 🎵");
+  });
+}
+</script>
+
+</body>
+</html>
